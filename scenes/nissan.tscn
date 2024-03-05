@@ -537,6 +537,5 @@ shape = SubResource("SphereShape3D_68y4u")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("ConvexPolygonShape3D_w15ef")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="body_entered" from="AreaSensor" to="." method="_on_area_3d_body_entered"]
 [connection signal="body_exited" from="AreaSensor" to="." method="_on_area_3d_body_exited"]

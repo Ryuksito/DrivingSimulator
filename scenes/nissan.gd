@@ -30,6 +30,3 @@ func _on_area_3d_body_exited(body):
 		if collision.node == body:
 			collisions.remove_at(collision.id)
 	print('exit collide: ', len(collisions))
-
-func _on_body_entered(body):
-	print("choco -1 punto")
