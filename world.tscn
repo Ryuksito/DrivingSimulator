@@ -1,0 +1,52 @@
+[gd_scene load_steps=7 format=3 uid="uid://dyv4sc6p0e8xn"]
+
+[ext_resource type="Script" path="res://scripts/world.gd" id="1_oj3d5"]
+[ext_resource type="Script" path="res://scripts/free_look_camera.gd" id="3_fr8xq"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pri11"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_3jf7x"]
+data = PackedVector3Array(1, 0, 1, -1, 0, 1, 1, 0, -1, -1, 0, 1, -1, 0, -1, 1, 0, -1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_400wo"]
+top_radius = 12.5
+bottom_radius = 12.5
+height = 60.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mek7p"]
+radius = 12.5
+
+[node name="World" type="Node3D"]
+script = ExtResource("1_oj3d5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(40, 0, 0, 0, 40, 0, 0, 0, 40, 0, 0, 0)
+mesh = SubResource("PlaneMesh_pri11")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_3jf7x")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 10, 0)
+shadow_enabled = true
+
+[node name="Spawner" type="Node3D" parent="."]
+transform = Transform3D(0.997989, -0.0633828, 0, 0.0633828, 0.997989, 0, 0, 0, 1, 4.27181, 2.67412, 0)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-0.999999, -1.74623e-10, -0.00160566, -0.00124433, 0.632002, 0.774966, 0.00101478, 0.774967, -0.632001, 0, 13.4032, 0)
+current = true
+script = ExtResource("3_fr8xq")
+
+[node name="StaticBody" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.916, 40)
+collision_layer = 5
+collision_mask = 5
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody"]
+mesh = SubResource("CylinderMesh_400wo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody"]
+shape = SubResource("CylinderShape3D_mek7p")
